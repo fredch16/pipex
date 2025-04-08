@@ -6,7 +6,7 @@
 #    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 12:58:21 by fredchar          #+#    #+#              #
-#    Updated: 2025/04/06 15:09:15 by fredchar         ###   ########.fr        #
+#    Updated: 2025/04/08 10:04:55 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ SRCS :=			ft_isalnum.c \
 				ft_putendl_fd.c \
 				ft_putnbr_fd.c \
 				ft_calloc.c \
+				ft_free_array.c \
 
 BONUS_SRCS :=	ft_lstnew.c \
 				ft_lstadd_front.c \

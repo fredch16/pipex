@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_free_array.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/06 15:39:04 by fredchar          #+#    #+#             */
-/*   Updated: 2025/04/08 13:43:12 by fredchar         ###   ########.fr       */
+/*   Created: 2025/04/08 10:03:39 by fredchar          #+#    #+#             */
+/*   Updated: 2025/04/08 10:47:15 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "libft.h"
 
-int	parse_input(t_data *data, int ac, char **av, char **ev)
+void	ft_free_array(char **array)
 {
-	if (ac != 5)
-		return (-1);
-	data->infile_path = av[1];
-	data->cmd1->cmd = av[2];
-	data->cmd2->cmd = av[3];
-	data->outfile_path = av[4];
-	data->envp = ev;
-	return (0);
+	int	i;
+
+	i = 0;
+	while (array[i])
+		free(array[i++]);
+	free(array);
 }
