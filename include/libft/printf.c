@@ -6,11 +6,11 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 19:24:55 by fredchar          #+#    #+#             */
-/*   Updated: 2025/03/25 16:47:13 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:38:54 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include "ft_printf.h"
 
 int	post_percent(char c, va_list ap)
 {

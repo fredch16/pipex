@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   execute.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/06 17:16:14 by fredchar          #+#    #+#             */
-/*   Updated: 2025/04/08 14:02:39 by fredchar         ###   ########.fr       */
-/*                                                                            */
+/*			                                                                */
+/*			                                            :::      ::::::::   */
+/*   execute.c			                              :+:      :+:    :+:   */
+/*			                                        +:+ +:+         +:+     */
+/*   By: fredchar <fredchar@student.42heilbronn.	+#+  +:+	   +#+	    */
+/*			                                    +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/06 17:16:14 by fredchar		  #+#	#+#             */
+/*   Updated: 2025/04/30 11:18:14 by fredchar		 ###   ########.fr	   */
+/*			                                                                */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
@@ -25,13 +25,14 @@ char	*access_full_path(char **paths, char *cmd)
 	i = 0;
 	while (paths[i])
 	{
-		printf("Path |%d|: %s\n", i, paths[i]);
+		// ft_printf("Path |%d|: %s\n", i, paths[i]);
 		full_path = ft_strjoin(paths[i], "/");
 		full_path = ft_strjoin(full_path, cmd);
-		printf("Full |%d|: %s\n", i, full_path);
-		if (access(full_path, X_OK) == 0)
+		// ft_printf("Full |%d|: %s\n", i, full_path);
+		if (access(full_path, F_OK) == 0)
 		{
 			ft_free_array(paths); // Free the split array
+			// printf("about to return |%s|\n", full_path);
 			return (full_path);
 		}
 		free(full_path);
@@ -41,60 +42,58 @@ char	*access_full_path(char **paths, char *cmd)
 	return (NULL);
 }
 
-char	*get_full_path(char *cmd, char **envp)
+char	*get_full_path(char *cmd, char **ev)
 {
 	char	*path_env;
 	char	**paths;
 	int		i;
 
-	// Get the PATH environment variable
 	i = 0;
 	path_env = NULL;
 	paths = NULL;
-	while (envp[i])
+	// fprintf(stderr, "ENVPDATA is |%s|\n", ev[0]);
+	while (ev[i])
 	{
-		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
+		if (ft_strncmp(ev[i], "PATH=", 5) == 0)
 		{
-			path_env = envp[i] + 5;
+			path_env = ev[i] + 5;
 			break ;
 		}
 		i++;
 	}
 	if (!path_env)
+	{
+		fprintf(stderr, "Error finding environment paths");
 		return (NULL);
+	}
 	// Split the PATH variable into directories
 	paths = ft_split(path_env, ':');
 	if (!paths)
-		return (NULL);
-
+	{
+		// fprintf(stderr, "WEEWEEEWEE\n");
+		error();
+	}
 	// Search for the command in each directory
+	// char *full_path = access_full_path(paths, cmd);
+	// printf("returned full path is |%s|\n", full_path);
 	return (access_full_path(paths, cmd));
 }
 
 // example of argv in this case would be "/bin/cat", "filename.txt", NULL
-int	execute_cmd(t_data *data, t_cmd *cmd, char *file)
-{
-	char	*argv[3];
-	char	*full_path;
 
-	// Resolve the full path of the command
-	full_path = get_full_path(cmd->cmd, data->envp);
-	if (!full_path)
-	{
-		ft_printf("Command not found: %s\n", cmd);
-		exit(EXIT_FAILURE);
-	}
-	// Prepare arguments for the command
-	argv[0] = cmd->cmd;   // Command (e.g., "cat")
-	argv[1] = file;  // File to pass as an argument
-	argv[2] = NULL;  // Null-terminated array
-	// Execute the command
-	if (execve(full_path, argv, data->envp) == -1)
-	{
-		perror("Error executing command");
-		free(full_path);
-		exit(EXIT_FAILURE);
-	}
-	free(full_path);
-	return (0); // This line will never be reached if execve succeeds
+int execute_cmd(char *av, char **ev)
+{
+	char	*path;
+	char	**argv;
+
+	argv = ft_split(av, ' ');
+	// 1. Get full command path (e.g., "/bin/cat")
+	path = get_full_path(argv[0], ev);
+	if (!path)
+		return(ft_printf("Command not found: %s\n", av),  EXIT_FAILURE);
+	// ft_printf("Path that was returned is |%s|\n", path);
+
+	if (execve(path, argv, ev) == -1)
+		return(perror("execve failed"), EXIT_FAILURE);
+	return (1);
 }

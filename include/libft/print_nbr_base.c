@@ -6,11 +6,11 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 20:24:11 by fredchar          #+#    #+#             */
-/*   Updated: 2025/04/08 10:07:15 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/04/24 17:34:09 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include "ft_printf.h"
 
 static int	ft_strlen(char *str)
 {

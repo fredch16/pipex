@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_array.c                                    :+:      :+:    :+:   */
+/*   print_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/22 14:00:00 by fredchar          #+#    #+#             */
-/*   Updated: 2025/04/29 16:30:49 by fredchar         ###   ########.fr       */
+/*   Created: 2025/03/12 20:09:02 by fredchar          #+#    #+#             */
+/*   Updated: 2025/04/22 15:38:48 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_free_array(char **array)
+int	print_str(char *str)
 {
 	int	i;
 
-	if (!array)
-		return;
-	i = 0;
-	while (array[i])
+	if (!str)
 	{
-		free(array[i]);
-		i++;
+		write(1, "(null)", 6);
+		return (6);
 	}
-	free(array);
+	i = 0;
+	while (str[i])
+		write(1, &str[i++], 1);
+	return (i);
 }

@@ -3,29 +3,24 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 12:58:21 by fredchar          #+#    #+#              #
-#    Updated: 2025/04/08 10:04:55 by fredchar         ###   ########.fr        #
+#    Updated: 2025/04/23 18:00:00 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := libft.a
 CC := gcc
-CFLAGS := -Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra -Werror -g
 INCD := includes
 OBJD := obj
-PRINTF_DIR := ft_printf
-PRINTF_LIB := $(PRINTF_DIR)/libftprintf.a
 
 # Colors
 GREEN := \033[0;32m
 YELLOW := \033[0;33m
 RED := \033[0;31m
 NC := \033[0m # No Color
-
-# Spinner animation
-SPINNER := / - \\ \|
 
 SRCS :=			ft_isalnum.c \
 				ft_isalpha.c \
@@ -62,6 +57,15 @@ SRCS :=			ft_isalnum.c \
 				ft_putnbr_fd.c \
 				ft_calloc.c \
 				ft_free_array.c \
+				print_char.c \
+				print_nbr_base.c \
+				print_pointer.c \
+				print_str.c \
+				printf.c \
+				get_next_line.c \
+				get_next_line_utils.c \
+				ft_free_char.c \
+				ft_strs_len.c \
 
 BONUS_SRCS :=	ft_lstnew.c \
 				ft_lstadd_front.c \
@@ -73,43 +77,32 @@ BONUS_SRCS :=	ft_lstnew.c \
 				ft_lstmap.c \
 				ft_lstsize.c \
 
-
 OBJS := $(SRCS:%.c=$(OBJD)/%.o)
 BONUS_OBJS := $(BONUS_SRCS:%.c=$(OBJD)/%.o)
 
-all: $(NAME) $(PRINTF_LIB)
-
-$(PRINTF_LIB):
-	@printf "$(YELLOW)Building ft_printf library...$(NC)\n"
-	@$(MAKE) -C $(PRINTF_DIR)
+all: $(NAME)
 
 $(OBJD)/%.o: %.c | $(OBJD)
-	@i=0; \
-	while [ $$i -lt 4 ]; do \
-		printf "\r$(YELLOW)Compiling $<... $${SPINNER:$$i:1}$(NC)"; \
-		sleep 0.001; \
-		i=$$((i+1)); \
-	done
+	@printf "$(YELLOW)Compiling $<...$(NC)\n"
 	@$(CC) $(CFLAGS) -I $(INCD) -c $< -o $@
-	@printf "\r$(GREEN)Compiled $< successfully!$(NC)\n"
+	@printf "$(GREEN)Compiled $< successfully!$(NC)\n"
 
 $(OBJD):
 	mkdir -p $(OBJD)
 
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
+	@printf "$(GREEN)Library $(NAME) built successfully!$(NC)\n"
 
 clean:
 	@printf "$(RED)Cleaning object files...$(NC)\n"
 	rm -rf $(OBJD)
 	@printf "$(GREEN)Object files cleaned!$(NC)\n"
-	@$(MAKE) -C $(PRINTF_DIR) clean
 
 fclean: clean
 	@printf "$(RED)Cleaning library ...$(NC)\n"
 	rm -f $(NAME)
 	@printf "$(GREEN)Library cleaned!$(NC)\n"
-	@$(MAKE) -C $(PRINTF_DIR) fclean
 
 re: fclean all
 

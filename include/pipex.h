@@ -6,34 +6,48 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 15:06:46 by fredchar          #+#    #+#             */
-/*   Updated: 2025/04/08 14:02:11 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/04/30 18:03:51 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 # include "libft/libft.h"
+# include <fcntl.h>
+# include <sys/wait.h>
 
-typedef	struct s_cmd
-{
-	int		fd_in;
-	int		fd_out;
-	char	*cmd;
-}	t_cmd;
 
 typedef struct s_data
 {
+	int		ac;
+	char	**envp;
+	char	**av;
+	int		infile_fd;
+	int		outfile_fd;
+	int		*pipes;
+	int		*pids;
+	int		child_id;
+	int		cmd_count;
+	int		exit_code;
+	char	*cmd;
+
 	char	*infile_path;
 	char	*outfile_path;
-	char	**envp;
-	t_cmd	*cmd1;
-	t_cmd	*cmd2;
 }	t_data;
 
-// Utility Functions
+// parsing.c
 
 int	parse_input(t_data *data, int ac, char **av, char **ev);
-// int	execute_cmd(char *cmd, char *file, char **ev);
-int	execute_cmd(t_data *data, t_cmd *cmd, char *file);
 
+// execute.c
+
+int execute_cmd(char *av, char **ev);
+
+// utils.c
+
+void	usage(void);
+void	error(void);
+int		open_file(char *av, int i);
+
+void	free_up(t_data *data);
 #endif

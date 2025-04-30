@@ -6,11 +6,11 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 20:53:07 by fredchar          #+#    #+#             */
-/*   Updated: 2025/03/13 17:32:35 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:38:44 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include "ft_printf.h"
 
 int	print_pointer(void *ptr)
 {

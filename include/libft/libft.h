@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:04:28 by fredchar          #+#    #+#             */
-/*   Updated: 2025/04/08 15:49:54 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:31:49 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h> // For ft_printf
+# include "ft_printf.h"
+# include "get_next_line.h"
+# include <stdint.h>
 
 // struct for the linked list functions
 
@@ -45,6 +48,7 @@ int				ft_strncmp(char *s1, char *s2, unsigned int n);
 int				ft_atoi(char *str);
 unsigned int	ft_strlcat(char *dest, const char *src, unsigned int size);
 unsigned int	ft_strlcpy(char *dst, const char *src, unsigned int dstsize);
+size_t			ft_strs_len(char **str);
 
 // memory functions
 
@@ -52,6 +56,7 @@ void			*ft_memchr(const void *s, int c, size_t n);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 void			*ft_memcpy(void *dest, const void *src, size_t n);
 void			*ft_memmove(void *dest, const void *src, size_t n);
+void			ft_free_array(char **array);
 
 // malloc / harder functions
 
@@ -62,6 +67,11 @@ char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strtrim(char const *s1, char const *set);
 char			*ft_itoa(int n);
 char			**ft_split(char const *s, char c);
+
+// free stuff
+
+void		ft_free_char2(char **tofree);
+void		ft_free_char3(char ***tofree);
 
 // functions in functions
 
@@ -76,7 +86,12 @@ void			ft_putendl_fd(char *s, int fd);
 void			ft_putnbr_fd(int nb, int fd);
 
 // ft_printf function
+
 int				ft_printf(const char *format, ...);
+
+// get_next_line function
+
+char	*get_next_line(int fd);
 
 //	bonus / linked list functions
 

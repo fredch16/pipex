@@ -6,11 +6,11 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 20:08:19 by fredchar          #+#    #+#             */
-/*   Updated: 2025/03/12 21:17:12 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:38:31 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include "ft_printf.h"
 
 int	print_char(char c)
 {
