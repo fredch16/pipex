@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 15:06:22 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/02 16:34:38 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/02 17:32:49 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ void	child_process(char *argv, char **envp, int *input_fd, int is_last, int file
 		*input_fd = fd[0];
 	}
 	else
+	{
 		close(output_fd);
+	}
 }
 
 int	main(int argc, char **argv, char **envp)
