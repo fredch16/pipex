@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 11:28:36 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/02 16:25:36 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/03 14:21:24 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ int	open_file(char *av, int i)
 
 	file = 0;
 	if (i == 0)
-		file = open(av, O_WRONLY | O_CREAT | O_APPEND, 0777);
+		file = open(av, O_WRONLY | O_CREAT | O_APPEND, 0666);
 	else if (i == 1)
-		file = open(av, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+		file = open(av, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	else if (i == 2)
 		file = open(av, O_RDONLY);
 	if (file == -1)

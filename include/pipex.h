@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 15:06:46 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/03 12:25:44 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/03 14:10:23 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ typedef struct s_data
 	int		outfile_fd;
 	int		input_fd;
 	int		output_fd;
+	int		heredoc;
+	int		cmd_idx;
 }	t_data;
 
 // parsing.c

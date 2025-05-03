@@ -61,7 +61,7 @@ char	*get_full_path(char *cmd, char **ev)
 	}
 	if (!path_env)
 	{
-		fprintf(stderr, "Error finding environment paths");
+		print_err("Error", "Cannot find environment paths", 1);
 		return (NULL);
 	}
 	paths = ft_split(path_env, ':');
