@@ -70,7 +70,7 @@ char	*get_full_path(char *cmd, char **ev)
 	return (access_full_path(paths, cmd));
 }
 
-int	execute_cmd(char *av, char **ev, int input_fd, int output_fd)
+int	execute_cmd(t_data *data, char *av)
 {
 	char	*path;
 	char	**argv;
@@ -79,7 +79,7 @@ int	execute_cmd(char *av, char **ev, int input_fd, int output_fd)
 	argv = ft_split(av, ' ');
 	if (!argv)
 		error();
-	path = get_full_path(argv[0], ev);
+	path = get_full_path(argv[0], data->envp);
 	if (!path)
 		return (ft_free_array(argv), print_err("Command not found, ", av, -1));
 	pid = fork();
@@ -87,15 +87,12 @@ int	execute_cmd(char *av, char **ev, int input_fd, int output_fd)
 		return (ft_free_array(argv), free(path), error(), -1);
 	if (pid == 0)
 	{
-		if (dup2(input_fd, 0) == -1 || dup2(output_fd, 1) == -1)
+		if (dup2(data->input_fd, 0) == -1 || dup2(data->output_fd, 1) == -1)
 			error();
-		close(input_fd);
-		close(output_fd);
-		if (execve(path, argv, ev) == -1)
+		close(data->input_fd);
+		close(data->output_fd);
+		if (execve(path, argv, data->envp) == -1)
 			return (perror("execve failed"), exit(EXIT_FAILURE), -1);
 	}
-	ft_free_array(argv);
-	free(path);
-	waitpid(pid, NULL, 0);
-	return (EXIT_SUCCESS);
+	return (ft_free_array(argv), free(path), waitpid(pid, NULL, 0), 0);
 }

@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 15:06:22 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/02 17:32:49 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/03 14:03:28 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,48 +14,46 @@
 
 // ./pipex file1 cmd1 cmd2 file2
 
-void	child_process(char *argv, char **envp, int *input_fd, int is_last, int fileout)
+void	child_process(t_data *data, char *argv, int is_last)
 {
 	int		fd[2];
-	int		output_fd;
 
 	if (!is_last && pipe(fd) == -1)
 		error();
 	if (is_last)
-		output_fd = fileout;
+		data->output_fd = data->outfile_fd;
 	else
-		output_fd = fd[1];
-	execute_cmd(argv, envp, *input_fd, output_fd);
+		data->output_fd = fd[1];
+	execute_cmd(data, argv);
 	if (!is_last)
 	{
 		close(fd[1]);
-		close(*input_fd);
-		*input_fd = fd[0];
+		close(data->input_fd);
+		data->input_fd = fd[0];
 	}
 	else
 	{
-		close(output_fd);
+		close(data->output_fd);
 	}
 }
 
 int	main(int argc, char **argv, char **envp)
 {
-	int	i;
-	int	filein;
-	int	fileout;
-	int	input_fd;
+	int		i;
+	t_data	data;
 
 	if (argc < 5)
 		return (usage(), -1);
 	i = 2;
-	fileout = open_file(argv[argc - 1], 1);
-	filein = open_file(argv[1], 2);
-	input_fd = filein;
+	data.envp = envp;
+	data.outfile_fd = open_file(argv[argc - 1], 1);
+	data.infile_fd = open_file(argv[1], 2);
+	data.input_fd = data.infile_fd;
 	while (i < argc - 2)
 	{
-		child_process(argv[i], envp, &input_fd, 0, fileout);
+		child_process(&data, argv[i], 0);
 		i++;
 	}
-	child_process(argv[argc - 2], envp, &input_fd, 1, fileout);
-	close(fileout);
+	child_process(&data, argv[argc - 2], 1);
+	close(data.outfile_fd);
 }

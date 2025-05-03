@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:00:00 by fredchar          #+#    #+#             */
-/*   Updated: 2025/04/29 16:30:49 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/03 12:26:10 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_free_array(char **array)
 	int	i;
 
 	if (!array)
-		return;
+		return ;
 	i = 0;
 	while (array[i])
 	{

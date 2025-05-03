@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:04:28 by fredchar          #+#    #+#             */
-/*   Updated: 2025/04/29 16:31:49 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/05/03 12:26:34 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ char			**ft_split(char const *s, char c);
 
 // free stuff
 
-void		ft_free_char2(char **tofree);
-void		ft_free_char3(char ***tofree);
+void			ft_free_char2(char **tofree);
+void			ft_free_char3(char ***tofree);
 
 // functions in functions
 
@@ -91,7 +91,7 @@ int				ft_printf(const char *format, ...);
 
 // get_next_line function
 
-char	*get_next_line(int fd);
+char			*get_next_line(int fd);
 
 //	bonus / linked list functions
 
