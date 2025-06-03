@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 15:06:46 by fredchar          #+#    #+#             */
-/*   Updated: 2025/05/03 14:10:23 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:36:41 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ typedef struct s_data
 {
 	char	**envp;
 	char	*cmd;
+	int		*pids;
+	int		cmd_count;
+	int		first_cmd;
 	int		infile_fd;
 	int		outfile_fd;
 	int		input_fd;

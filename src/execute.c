@@ -94,5 +94,5 @@ int	execute_cmd(t_data *data, char *av)
 		if (execve(path, argv, data->envp) == -1)
 			return (perror("execve failed"), exit(EXIT_FAILURE), -1);
 	}
-	return (ft_free_array(argv), free(path), waitpid(pid, NULL, 0), 0);
+	return (ft_free_array(argv), free(path), pid);
 }
