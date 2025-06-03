@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 15:06:22 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/03 15:41:05 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/06/03 16:17:20 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,6 @@ int	main(int argc, char **argv, char **envp)
 			waitpid(data.pids[i], NULL, 0);
 		i++;
 	}
-	close(data.outfile_fd);
+	free(data.pids);
+	close(data.input_fd);
 }
